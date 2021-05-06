@@ -3169,7 +3169,7 @@ var plugins = [{
     "short_name": "starter",
     "start_url": "/",
     "background_color": "#663399",
-    "theme_color": "#663399",
+    "theme_color": "#002350",
     "display": "minimal-ui",
     "icon": "src/images/gatsby-icon.png",
     "legacy": true,
@@ -11396,24 +11396,24 @@ module.exports = withSideEffect;
 /***/ }),
 
 /***/ "react-dom/server":
-/*!********************************************************************************!*\
-  !*** external "/home/tom/source/ort/ruletap/node_modules/react-dom/server.js" ***!
-  \********************************************************************************/
+/*!*******************************************************************************!*\
+  !*** external "/home/tom/source/ort/ruleta/node_modules/react-dom/server.js" ***!
+  \*******************************************************************************/
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("/home/tom/source/ort/ruletap/node_modules/react-dom/server.js");;
+module.exports = require("/home/tom/source/ort/ruleta/node_modules/react-dom/server.js");;
 
 /***/ }),
 
 /***/ "react":
-/*!***************************************************************************!*\
-  !*** external "/home/tom/source/ort/ruletap/node_modules/react/index.js" ***!
-  \***************************************************************************/
+/*!**************************************************************************!*\
+  !*** external "/home/tom/source/ort/ruleta/node_modules/react/index.js" ***!
+  \**************************************************************************/
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("/home/tom/source/ort/ruletap/node_modules/react/index.js");;
+module.exports = require("/home/tom/source/ort/ruleta/node_modules/react/index.js");;
 
 /***/ }),
 
