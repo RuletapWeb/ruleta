@@ -1,11 +1,11 @@
-import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import * as React from "react";
+import { Link } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import Layout from "../components/layout";
+import Seo from "../components/seo";
 
-const RuletaPage = () => (
+const RuletaPage: React.FC = () => (
   <Layout>
     <Seo title="Ruleta" />
     <h1>Ruleta</h1>
@@ -21,6 +21,6 @@ const RuletaPage = () => (
       <Link to="/success/">Esto va al success</Link>
     </p>
   </Layout>
-)
+);
 
-export default RuletaPage
+export default RuletaPage;

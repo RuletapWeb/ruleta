@@ -5,7 +5,7 @@ import { StaticImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-const SuccessPage = () => (
+const SuccessPage: React.FC = () => (
   <Layout>
     <Seo title="Success" />
     <h1>Hi people</h1>
