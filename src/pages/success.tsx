@@ -9,7 +9,7 @@ const Success: React.FC<PageProps> = () => (
     <Header />
     <main>
       <p>3 - Success</p>
-      <Link to="/">Volver al principio</Link>
+      <Link to="/">Prox pagina</Link>
     </main>
   </Layout>
 );
