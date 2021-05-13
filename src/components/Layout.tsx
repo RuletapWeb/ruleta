@@ -26,7 +26,7 @@ type Props = {
  */
 const Layout: React.FC<Props> = ({ children }) => (
   <>
-    <SEO title="Tap" />
+    <SEO />
     <GlobalStyle />
     {children}
   </>
