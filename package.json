@@ -1,9 +1,9 @@
 {
-  "name": "tap-mide-landing-site",
-  "description": "Promotional landing site for Tap + Mide promotion",
+  "name": "tap-ruleta",
+  "description": "Promotional landing site for Tap",
   "version": "1.0.0",
   "private": true,
-  "author": "Thomas A. Shaw - tshaw@auntap.com (github.com/tomasshaw)",
+  "author": "Tap + Ort Students",
   "license": "MIT",
   "keywords": [
     "gatsby",
