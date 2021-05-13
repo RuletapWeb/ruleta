@@ -1,38 +1,58 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
+import * as React from 'react';
+import { Helmet } from 'react-helmet';
+import { useStaticQuery, graphql } from 'gatsby';
 
-import * as React from "react";
-import PropTypes from "prop-types";
-import { Helmet } from "react-helmet";
-import { useStaticQuery, graphql, PageProps } from "gatsby";
-
-type SeoProps = {
-  description: string;
-  lang: "es" | "en";
-  meta: string[];
-  title: string;
+// Types
+type SEOProps = {
+  description?: string;
+  lang?: string;
+  meta?: Meta;
 };
 
-const Seo: React.FC<SeoProps> = ({ description, lang, meta, title }) => {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
+type PropertyMetaObj = {
+  property: string;
+  content: string;
+};
+
+type NameMetaObj = {
+  name: string;
+  content: string;
+};
+
+type Meta = ConcatArray<PropertyMetaObj | NameMetaObj>;
+
+type QueryTypes = {
+  site: {
+    siteMetadata: {
+      title: string;
+      description: string;
+      apple: string;
+    };
+  };
+};
+
+// Queries
+const SEOStaticQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+        description
+        apple
       }
-    `
-  );
+    }
+  }
+`;
+
+const SEO: React.FC<SEOProps> = ({
+  description = ``,
+  lang = `en`,
+  meta = [],
+}) => {
+  const { site } = useStaticQuery<QueryTypes>(SEOStaticQuery);
 
   const metaDescription = description || site.siteMetadata.description;
+  const appleLink = site.siteMetadata?.apple;
   const defaultTitle = site.siteMetadata?.title;
 
   return (
@@ -40,8 +60,8 @@ const Seo: React.FC<SeoProps> = ({ description, lang, meta, title }) => {
       htmlAttributes={{
         lang,
       }}
-      title={title}
-      //titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
+      title={defaultTitle}
+      titleTemplate={defaultTitle}
       meta={[
         {
           name: `description`,
@@ -49,7 +69,7 @@ const Seo: React.FC<SeoProps> = ({ description, lang, meta, title }) => {
         },
         {
           property: `og:title`,
-          content: title,
+          content: defaultTitle,
         },
         {
           property: `og:description`,
@@ -60,24 +80,12 @@ const Seo: React.FC<SeoProps> = ({ description, lang, meta, title }) => {
           content: `website`,
         },
         {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata?.author || ``,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
+          property: `apple-itunes-app`,
+          content: appleLink,
         },
       ].concat(meta)}
     />
   );
 };
 
-export default Seo;
+export default SEO;

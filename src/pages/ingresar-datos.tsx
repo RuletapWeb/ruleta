@@ -4,14 +4,14 @@ import { PageProps, Link } from 'gatsby';
 import Header from '@/components/Header';
 import Layout from '@/components/Layout';
 
-const Home: React.FC<PageProps> = () => (
+const IngresarDatos: React.FC<PageProps> = () => (
   <Layout>
     <Header />
     <main>
-      <p>0 - Home</p>
-      <Link to="/ingresar-datos">Prox pag</Link>
+      <p>1 - Ingresar Datos</p>
+      <Link to="/verificar">Prox pag</Link>
     </main>
   </Layout>
 );
 
-export default Home;
+export default IngresarDatos;
