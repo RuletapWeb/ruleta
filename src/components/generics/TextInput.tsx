@@ -7,6 +7,7 @@ type TextInputProps = {
   placeholder: string;
   icon?: string;
   infoText?: string;
+  maxWidth?: number;
 };
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -14,10 +15,10 @@ const TextInput: React.FC<TextInputProps> = ({
   placeholder,
   icon,
   infoText,
+  maxWidth,
 }) => {
   const InputWrapper = styled.div`
     background-color: #ffffff;
-    width: 60%;
     display: grid;
     grid-template-columns: 1fr min-content;
     column-gap: 1em;
@@ -40,6 +41,7 @@ const TextInput: React.FC<TextInputProps> = ({
     color: #ffffff;
     padding: 0.5em 1em;
   `;
+
   return (
     <>
       <InputWrapper>
