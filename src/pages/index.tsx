@@ -4,8 +4,10 @@ import { PageProps, Link } from 'gatsby';
 import Header from '@/components/Header';
 import TextInput from '@/components/generics/TextInput';
 import ViewWrapper from '@/components/generics/ViewWrapper';
+import PrizeList from '@/components/PrizeList';
 import Layout from '@/components/Layout';
 import Roulette from '@/components/Roulette';
+import dummyPrizes from '../assets/dummyPrizes.json';
 
 const Home: React.FC<PageProps> = () => (
   <Layout>
@@ -32,7 +34,7 @@ const Home: React.FC<PageProps> = () => (
           infoText="Con código de área sin el 0 y sin el 15"
         />
       </ViewWrapper>
-
+      <PrizeList title="Premios disponibles" quantity={6} items={dummyPrizes} />
       <p>0 - Home</p>
       <Link to="/ingresar-datos">Prox pag</Link>
     </main>

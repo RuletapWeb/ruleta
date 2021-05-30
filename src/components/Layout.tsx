@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import SEO from '@/components/seo';
+import FontStyles from '@/components/FontStyles';
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -13,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
     outline: 0;
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
   }
 `;
 
@@ -26,8 +28,9 @@ type Props = {
  */
 const Layout: React.FC<Props> = ({ children }) => (
   <>
-    <SEO />
     <GlobalStyle />
+    <FontStyles />
+    <SEO />
     {children}
   </>
 );
