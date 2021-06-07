@@ -1,0 +1,17 @@
+import React from 'react';
+import { PageProps } from 'gatsby';
+import InfoPage from '@/components/generics/InfoPage';
+import Message from '@/components/Message';
+import errorIcon from '../images/error_illus.png';
+
+const YaCanjeado: React.FC<PageProps> = () => (
+  <InfoPage>
+    <Message
+      iconUrl={errorIcon}
+      copy="Tenemos problemas para conectarnos a internet. Volvé a intentalo más tarde."
+      ctaText="Reintentar"
+    />
+  </InfoPage>
+);
+
+export default YaCanjeado;

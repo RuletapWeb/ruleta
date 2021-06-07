@@ -8,23 +8,22 @@ type WrapperProps = {
   children: React.ReactNode;
 };
 
+const Container = styled.div<WrapperProps>`
+  width: 100%;
+  max-width: ${(props): string =>
+    props.dMaxWidth ? `${String(props.dMaxWidth)}px` : `auto`};
+  background-color: ${(props): string =>
+    props.bgColor ? props.bgColor : `auto`};
+`;
+
 const ViewWrapper: React.FC<WrapperProps> = ({
   dMaxWidth,
   mMaxWidth,
   bgColor,
   children,
-}) => {
-  const Container = styled.div<WrapperProps>`
-    width: 100%;
-    max-width: ${(props): string =>
-      props.dMaxWidth ? `${String(props.dMaxWidth)}px` : `auto`};
-    background-color: ${(props): string =>
-      props.bgColor ? props.bgColor : `auto`};
-  `;
-  return (
-    <Container dMaxWidth={dMaxWidth} bgColor={bgColor}>
-      {children}
-    </Container>
-  );
-};
+}) => (
+  <Container dMaxWidth={dMaxWidth} bgColor={bgColor}>
+    {children}
+  </Container>
+);
 export default ViewWrapper;
