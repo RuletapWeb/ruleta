@@ -29,7 +29,6 @@ const Message: React.FC<MessageProps> = ({ iconUrl, copy, ctaText }) => (
       <MessageText> {copy} </MessageText>
       {ctaText}
     </Centered>
-    {` `}
   </ViewWrapper>
 );
 export default Message;
