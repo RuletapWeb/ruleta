@@ -12,9 +12,15 @@ const HeaderWrapper = styled.header`
   top: 0;
 `;
 
+const TapLogoWrapper = styled.div`
+  margin: 12px 0;
+`;
+
 const Header: React.FC = () => (
   <HeaderWrapper>
-    <TapLogoColor />
+    <TapLogoWrapper>
+      <TapLogoColor />
+    </TapLogoWrapper>
   </HeaderWrapper>
 );
 
