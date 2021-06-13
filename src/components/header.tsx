@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import tapLogo from '../images/header_logo.png';
+import TapLogoColor from '@/components/generics/svg/tapLogoColor';
 
 const HeaderWrapper = styled.header`
   background-color: #f6f7fb;
@@ -12,19 +12,15 @@ const HeaderWrapper = styled.header`
   top: 0;
 `;
 
-const Image = styled.img`
-  width: 125px;
-  height: 65px;
-
-  @media (max-width: 700px) {
-    width: 89.28px;
-    height: 46.43px;
-  }
+const TapLogoWrapper = styled.div`
+  margin: 12px 0;
 `;
 
 const Header: React.FC = () => (
   <HeaderWrapper>
-    <Image src={tapLogo} alt="Tap Logo" />
+    <TapLogoWrapper>
+      <TapLogoColor />
+    </TapLogoWrapper>
   </HeaderWrapper>
 );
 

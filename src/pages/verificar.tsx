@@ -1,8 +1,8 @@
 import React from 'react';
 import { PageProps, Link } from 'gatsby';
 
-import Header from '@/components/Header';
-import Layout from '@/components/Layout';
+import Header from '@/components/header';
+import Layout from '@/components/layout';
 
 const Verificar: React.FC<PageProps> = () => (
   <Layout>
