@@ -8,7 +8,7 @@ const baseUrl = process.env.GATSBY_API_URL;
 const phoneRegex = /^(?:11|[2368]\d)\d{8}$/;
 const emailRegex =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-const viewsArray: string[] = ['', 'ingresar-datos', 'verificar', 'success'];
+const viewsArray: string[] = ['', 'play', 'ganador'];
 
 const inputChangeHandler =
   (setter: (input: any) => void, validator?: (input: StrNum) => boolean) =>
