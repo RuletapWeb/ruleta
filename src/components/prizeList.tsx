@@ -2,14 +2,16 @@ import * as React from 'react';
 import styled from 'styled-components';
 import PrizeListItem from './generics/prizeListItem';
 
-type PrizeListProps = {
+type EndItemProps = {
+  quantity?: number;
+  items?: any;
+};
+
+type PrizeListProps = EndItemProps & {
   title: string;
-  quantity: number;
-  items: any;
 };
 
 const Container = styled.div`
-  width: 100%;
   background-color: #edf3fb;
   display: grid;
   place-items: center;
@@ -17,7 +19,7 @@ const Container = styled.div`
   margin: 1em;
   @media (max-width: 768px) {
     justify-items: start;
-    padding: 2em 1em 4em;
+    padding: 0;
   }
 `;
 
@@ -49,19 +51,23 @@ const List = styled.ul`
   }
 `;
 
-const PrizeList: React.FC<PrizeListProps> = ({ title, items, quantity }) => {
-  const prizes = (
-    <List>
-      {items.slice(0, quantity).map((item) => (
-        <PrizeListItem item={item} />
-      ))}
-    </List>
-  );
-  return (
-    <Container>
-      <Title>{title}</Title>
-      {prizes}
-    </Container>
-  );
-};
+const prizesData = (): any => JSON.parse(localStorage.getItem('prizesData'));
+
+const Prizes: React.FC<EndItemProps> = ({
+  items = prizesData(),
+  quantity = 6,
+}) => (
+  <List>
+    {items.slice(0, quantity).map((item: any) => (
+      <PrizeListItem item={item} key={item.id} />
+    ))}
+  </List>
+);
+
+const PrizeList: React.FC<PrizeListProps> = ({ title, ...rest }) => (
+  <Container>
+    <Title>{title}</Title>
+    <Prizes {...rest} />
+  </Container>
+);
 export default PrizeList;

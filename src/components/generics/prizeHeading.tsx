@@ -1,8 +1,6 @@
 import React from 'react';
-import { PageProps } from 'gatsby';
 import styled from 'styled-components';
 import Centered from '@/components/generics/centered';
-import Layout from '@/components/layout';
 
 type PrizeHeadingProps = {
   emoji: string;
@@ -21,10 +19,16 @@ const Title = styled.h4`
   line-height: 133%;
   letter-spacing: 0.15px;
   color: #002350;
+  margin: 12px auto;
+`;
+const Prize = styled(Title)`
+  margin: 0;
 `;
 const InfoPage: React.FC<PrizeHeadingProps> = ({ emoji, title, prize }) => (
   <Centered>
     <Emoji>{emoji}</Emoji>
+    <Title>{title}</Title>
+    <Prize>{prize}</Prize>
   </Centered>
 );
 

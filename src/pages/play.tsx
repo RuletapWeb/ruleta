@@ -25,7 +25,7 @@ const Heading = styled.h1`
 `;
 
 const Play: React.FC<PageProps> = () => (
-  <InfoPage>
+  <InfoPage isProtected>
     <Container>
       <ViewWrapper dMaxWidth={400}>
         <Heading>¡Buena suerte!</Heading>

@@ -1,17 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import dummyPrizes from '../assets/dummyPrizes.json';
 import centerLogo from '../assets/center.png';
 import pointer from '../assets/pointer.png';
 
-const dummyData = dummyPrizes
-  .map((prize) => ({ option: prize.name }))
-  .slice(0, 5);
+const baseUrl = process.env.GATSBY_API_URL;
 
 const RouletteContainer = styled.div`
   & {
-    width: 400px;
-    height: 400px;
+    min-width: 100%;
+    min-height: 100%;
     border-radius: 50%;
     background: #f3f6fa;
     position: relative;
@@ -27,7 +24,14 @@ const RouletteContainer = styled.div`
     }
   }
 `;
+
 const RouletteWrapper = styled.div`
+  --tot-size: 400px;
+  @media (max-width: 480px) {
+    --tot-size: 300px;
+  }
+  width: var(--tot-size);
+  height: var(--tot-size);
   &::before {
     content: '';
     display: block;
@@ -41,104 +45,145 @@ const RouletteWrapper = styled.div`
     z-index: 99;
     left: calc(50% - 23px);
     margin-top: -2.5%;
+    @media (max-width: 480px) {
+      margin-top: -12.5%;
+    }
   }
 `;
+
 const Line = styled.div`
-  width: 400px;
+  width: 100%;
   height: 3px;
   background: #536789;
   position: absolute;
-  top: 199px;
+  top: 50%;
   left: 0;
 `;
+
 const Line1 = styled(Line)`
   transform: rotate(60deg);
 `;
+
 const Line2 = styled(Line)`
   transform: rotate(120deg);
 `;
+
 const Line3 = styled(Line)`
   transform: rotate(180deg);
 `;
+
 const LogoCenter = styled.img`
-  width: 70px;
+  width: 18%;
   position: absolute;
   top: 41%;
   left: 41%;
 `;
+
 const Content = styled.div`
   font-size: 30px;
   font-weight: bold;
   padding-top: 20px;
-  height: 380px;
+  height: 95%;
   position: absolute;
   width: 100%;
   text-align: center;
 `;
+
 const Content1 = styled(Content)`
   transform: rotate(0deg);
 `;
+
 const Content2 = styled(Content)`
   transform: rotate(60deg);
 `;
+
 const Content3 = styled(Content)`
   transform: rotate(120deg);
 `;
+
 const Content4 = styled(Content)`
   transform: rotate(180deg);
 `;
+
 const Content5 = styled(Content)`
   transform: rotate(240deg);
 `;
+
 const Content6 = styled(Content)`
   transform: rotate(300deg);
 `;
+
 const PrizeTitle = styled.h6`
-  & {
-    font-family: 'Open Sans', sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 19.3402px;
-    text-align: center;
-    color: #002350;
-    max-width: 100px;
-    margin: 0 auto;
-  }
-  &::after {
-    content: '😈';
-    display: block;
-    margin-top: 2em;
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 19px;
+  text-align: center;
+  color: #002350;
+  max-width: 150px;
+  margin: 0 auto;
+  height: 2em;
+  @media (max-width: 480px) {
+    font-size: 15px;
   }
 `;
-const Roulette: React.FC = () => (
-  <>
-    <RouletteWrapper>
-      <RouletteContainer>
-        <Line1 />
-        <Line2 />
-        <Line3 />
-        <LogoCenter src={centerLogo} />
-        <Content1>
-          <PrizeTitle>Pizza Hawaiiana </PrizeTitle>
-        </Content1>
-        <Content2>
-          <PrizeTitle>Pizza Hawaiiana </PrizeTitle>
-        </Content2>
-        <Content3>
-          <PrizeTitle>Pizza Hawaiiana </PrizeTitle>
-        </Content3>
-        <Content4>
-          <PrizeTitle>Pizza Hawaiiana </PrizeTitle>
-        </Content4>
-        <Content5>
-          <PrizeTitle>Pizza Hawaiiana </PrizeTitle>
-        </Content5>
-        <Content6>
-          <PrizeTitle>Pizza Hawaiiana </PrizeTitle>
-        </Content6>
-      </RouletteContainer>
-    </RouletteWrapper>
-  </>
+
+const Logo = styled.div<{ logo: string }>`
+  display: block;
+  margin: 0.5em auto 0;
+  border: 1px solid #8495aa;
+  width: 32px;
+  height: 32px;
+  background-image: url('${(props): string =>
+    props.logo || `https://picsum.photos/200`}');
+  background-size: cover;
+  border-radius: 50%;
+`;
+
+const RouletteComponent: React.FC<{ prizes: any }> = ({ prizes }) => (
+  <RouletteWrapper>
+    <RouletteContainer>
+      <Line1 />
+      <Line2 />
+      <Line3 />
+      <LogoCenter src={centerLogo} />
+      <Content1>
+        <PrizeTitle>{prizes[0].title}</PrizeTitle>
+        <Logo logo={`${baseUrl}${prizes[0].photo[0].formats.thumbnail.url}`} />
+      </Content1>
+      <Content2>
+        <PrizeTitle>{prizes[1].title}</PrizeTitle>
+        <Logo logo={`${baseUrl}${prizes[1].photo[0].formats.thumbnail.url}`} />
+      </Content2>
+      <Content3>
+        <PrizeTitle>{prizes[2].title}</PrizeTitle>
+        <Logo logo={`${baseUrl}${prizes[2].photo[0].formats.thumbnail.url}`} />
+      </Content3>
+      <Content4>
+        <PrizeTitle>{prizes[3].title}</PrizeTitle>
+        <Logo logo={`${baseUrl}${prizes[3].photo[0].formats.thumbnail.url}`} />
+      </Content4>
+      <Content5>
+        <PrizeTitle>{prizes[4].title}</PrizeTitle>
+        <Logo logo={`${baseUrl}${prizes[4].photo[0].formats.thumbnail.url}`} />
+      </Content5>
+      <Content6>
+        <PrizeTitle>{prizes[5].title}</PrizeTitle>
+        <Logo logo={`${baseUrl}${prizes[5].photo[0].formats.thumbnail.url}`} />
+      </Content6>
+    </RouletteContainer>
+  </RouletteWrapper>
 );
+
+const Roulette = () => {
+  const [prizes, setPrizes] = useState([]);
+  useEffect(() => {
+    setPrizes(JSON.parse(localStorage.getItem('prizesData')));
+  }, []);
+  if (!prizes || prizes.length < 6) {
+    return null;
+  }
+  return <RouletteComponent prizes={prizes} />;
+};
 
 export default Roulette;

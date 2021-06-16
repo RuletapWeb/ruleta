@@ -1,10 +1,12 @@
 import React from 'react';
 import { PageProps } from 'gatsby';
 import InfoPage from '@/components/generics/infoPage';
+import ViewWrapper from '@/components/generics/viewWrapper';
 import PrizeHeading from '@/components/generics/prizeHeading';
 import CommerceInfoBox from '@/components/generics/commerceInfoBox';
-import DateInfoBox from '@/components/generics/dateInfoBox';
+import UserInfoBox from '@/components/generics/userInfoBox';
 import styled from 'styled-components';
+import errorIcon from '../images/error_illus.png';
 
 const ContentWrapper = styled.div`
   width: 100%;
@@ -25,19 +27,21 @@ const BoxWrapper = styled(ContentWrapper)`
     flex-grow: 1;
   }
 `;
-
-const YaCanjeado: React.FC<PageProps> = () => (
+const SinCanjear: React.FC<PageProps> = () => (
   <InfoPage>
     <ContentWrapper>
       <PrizeHeading
-        emoji="😁"
-        title="Este premio ya fue canjeado"
+        emoji="😧"
+        title="Todavía no canjeaste tu premio"
         prize="Nombre premio"
       />
       <BoxWrapper>
-        <DateInfoBox
-          dateTitle="Fecha de canje:"
-          dateString="00/00/21 a las 00:00 hs."
+        <UserInfoBox
+          userData={{
+            mail: `mail@usuario.com`,
+          }}
+          infoTitle="Te enviamos el código para canjear a tu email:"
+          tip="Tip: revisá la carpeta de spam"
         />
         <CommerceInfoBox
           commerceData={{
@@ -55,4 +59,4 @@ const YaCanjeado: React.FC<PageProps> = () => (
   </InfoPage>
 );
 
-export default YaCanjeado;
+export default SinCanjear;

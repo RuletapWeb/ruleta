@@ -9,11 +9,9 @@ type WrapperProps = {
 };
 
 const Container = styled.div<WrapperProps>`
-  width: 100%;
   max-width: ${(props): string =>
     props.dMaxWidth ? `${String(props.dMaxWidth)}px` : `auto`};
-  background-color: ${(props): string =>
-    props.bgColor ? props.bgColor : `auto`};
+  background-color: ${(props): string => props.bgColor || `auto`};
 `;
 
 const ViewWrapper: React.FC<WrapperProps> = ({

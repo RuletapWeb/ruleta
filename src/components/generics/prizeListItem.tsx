@@ -1,8 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
+const baseUrl = process.env.GATSBY_API_URL;
+
 type PrizeListItemProps = {
-  item: { logo: string; name: string };
+  item: { photo: any[]; title: string };
 };
 
 const ListItem = styled.li`
@@ -28,25 +30,26 @@ const ListItem = styled.li`
 `;
 
 const Wrapper = styled.div`
+  --spaceUnit: 16px;
   max-width: 90%;
   @media (max-width: 768px) {
-    width: 100%;
+    width: calc(100% - var(--spaceUnit) * 2);
     max-width: 100%;
     display: grid;
     grid-template-columns: min-content max-content;
     align-items: center;
     justify-items: start;
     column-gap: 1em;
-    padding: 16px 13px;
+    padding: var(--spaceUnit) 13px;
   }
 `;
 
-const Logo = styled.div<PrizeListItemProps>`
+const Logo = styled.div<{ logo: string }>`
   border: 1px solid #8495aa;
   width: 32px;
   height: 32px;
   background-image: url('${(props): string =>
-    props.item?.logo || `https://picsum.photos/200`}');
+    props.logo || `https://picsum.photos/200`}');
   background-size: cover;
   border-radius: 50%;
   margin: 0 auto 0.5em;
@@ -55,11 +58,13 @@ const Logo = styled.div<PrizeListItemProps>`
   }
 `;
 
+// <Logo logo={`${baseUrl}${item.photo[0].url}`} />
+
 const PrizeListItem: React.FC<PrizeListItemProps> = ({ item }) => (
   <ListItem>
     <Wrapper>
-      <Logo item={item} />
-      <h5>{item.name}</h5>
+      <Logo logo={`${baseUrl}${item.photo[0].formats.thumbnail.url}`} />
+      <h5>{item.title}</h5>
     </Wrapper>
   </ListItem>
 );

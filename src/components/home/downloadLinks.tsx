@@ -26,6 +26,7 @@ const StoreWrapper = styled.div`
   justify-content: space-around;
   width: 100%;
   margin: 30px 0;
+  max-width: 600px;
 `;
 
 const DownloadLinks: React.FC = () => (

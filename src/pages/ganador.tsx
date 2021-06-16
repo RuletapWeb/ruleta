@@ -3,7 +3,7 @@ import { PageProps } from 'gatsby';
 import InfoPage from '@/components/generics/infoPage';
 import PrizeHeading from '@/components/generics/prizeHeading';
 import CommerceInfoBox from '@/components/generics/commerceInfoBox';
-import DateInfoBox from '@/components/generics/dateInfoBox';
+import UserInfoBox from '@/components/generics/userInfoBox';
 import styled from 'styled-components';
 
 const ContentWrapper = styled.div`
@@ -25,19 +25,21 @@ const BoxWrapper = styled(ContentWrapper)`
     flex-grow: 1;
   }
 `;
-
-const YaCanjeado: React.FC<PageProps> = () => (
+const Ganador: React.FC<PageProps> = () => (
   <InfoPage>
     <ContentWrapper>
       <PrizeHeading
-        emoji="😁"
-        title="Este premio ya fue canjeado"
+        emoji="🥳"
+        title="¡Felicitaciones, Ganaste!"
         prize="Nombre premio"
       />
       <BoxWrapper>
-        <DateInfoBox
-          dateTitle="Fecha de canje:"
-          dateString="00/00/21 a las 00:00 hs."
+        <UserInfoBox
+          userData={{
+            mail: `mail@usuario.com`,
+          }}
+          infoTitle="Te enviamos el código para canjear a tu email:"
+          tip="Tip: revisá la carpeta de spam"
         />
         <CommerceInfoBox
           commerceData={{
@@ -55,4 +57,4 @@ const YaCanjeado: React.FC<PageProps> = () => (
   </InfoPage>
 );
 
-export default YaCanjeado;
+export default Ganador;

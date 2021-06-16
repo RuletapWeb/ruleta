@@ -14,8 +14,11 @@ const Main = styled.main`
   place-items: center;
 `;
 
-const InfoPage: React.FC = ({ children }) => (
-  <Layout>
+const InfoPage: React.FC<{ isProtected?: boolean }> = ({
+  children,
+  isProtected = false,
+}) => (
+  <Layout isProtected={isProtected}>
     <FullHeight>
       <Header />
       <Main>{children}</Main>
