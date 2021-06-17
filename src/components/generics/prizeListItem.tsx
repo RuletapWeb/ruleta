@@ -51,14 +51,13 @@ const Logo = styled.div<{ logo: string }>`
   background-image: url('${(props): string =>
     props.logo || `https://picsum.photos/200`}');
   background-size: cover;
+  background-position: center;
   border-radius: 50%;
   margin: 0 auto 0.5em;
   @media (max-width: 768px) {
     margin-bottom: 0;
   }
 `;
-
-// <Logo logo={`${baseUrl}${item.photo[0].url}`} />
 
 const PrizeListItem: React.FC<PrizeListItemProps> = ({ item }) => (
   <ListItem>
@@ -68,4 +67,5 @@ const PrizeListItem: React.FC<PrizeListItemProps> = ({ item }) => (
     </Wrapper>
   </ListItem>
 );
+
 export default PrizeListItem;

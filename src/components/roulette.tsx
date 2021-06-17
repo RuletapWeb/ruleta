@@ -14,16 +14,24 @@ const RouletteContainer = styled.div`
     background: #f3f6fa;
     position: relative;
     z-index: 1;
-    animation: rotation 10s ease-in-out forwards;
+    animation: rotation 9s ease-in-out forwards;
   }
   @keyframes rotation {
     from {
+      transform: rotate(0deg);
+    }
+    20% {
       transform: rotate(0deg);
     }
     to {
       transform: rotate(5400deg);
     }
   }
+`;
+
+const FadeOut = styled.div<{ fadeOut: boolean }>`
+  transition: 1s ease;
+  ${({ fadeOut }) => fadeOut && 'opacity: 0;'}
 `;
 
 const RouletteWrapper = styled.div`
@@ -129,6 +137,17 @@ const PrizeTitle = styled.h6`
   }
 `;
 
+const Heading = styled.h1`
+  font-family: Comfortaa, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 133%;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 3em;
+`;
+
 const Logo = styled.div<{ logo: string }>`
   display: block;
   margin: 0.5em auto 0;
@@ -137,55 +156,76 @@ const Logo = styled.div<{ logo: string }>`
   height: 32px;
   background-image: url('${(props): string =>
     props.logo || `https://picsum.photos/200`}');
+  background-position: center;
   background-size: cover;
   border-radius: 50%;
 `;
 
-const RouletteComponent: React.FC<{ prizes: any }> = ({ prizes }) => (
-  <RouletteWrapper>
-    <RouletteContainer>
-      <Line1 />
-      <Line2 />
-      <Line3 />
-      <LogoCenter src={centerLogo} />
-      <Content1>
-        <PrizeTitle>{prizes[0].title}</PrizeTitle>
-        <Logo logo={`${baseUrl}${prizes[0].photo[0].formats.thumbnail.url}`} />
-      </Content1>
-      <Content2>
-        <PrizeTitle>{prizes[1].title}</PrizeTitle>
-        <Logo logo={`${baseUrl}${prizes[1].photo[0].formats.thumbnail.url}`} />
-      </Content2>
-      <Content3>
-        <PrizeTitle>{prizes[2].title}</PrizeTitle>
-        <Logo logo={`${baseUrl}${prizes[2].photo[0].formats.thumbnail.url}`} />
-      </Content3>
-      <Content4>
-        <PrizeTitle>{prizes[3].title}</PrizeTitle>
-        <Logo logo={`${baseUrl}${prizes[3].photo[0].formats.thumbnail.url}`} />
-      </Content4>
-      <Content5>
-        <PrizeTitle>{prizes[4].title}</PrizeTitle>
-        <Logo logo={`${baseUrl}${prizes[4].photo[0].formats.thumbnail.url}`} />
-      </Content5>
-      <Content6>
-        <PrizeTitle>{prizes[5].title}</PrizeTitle>
-        <Logo logo={`${baseUrl}${prizes[5].photo[0].formats.thumbnail.url}`} />
-      </Content6>
-    </RouletteContainer>
-  </RouletteWrapper>
+const RouletteComponent: React.FC<{ prizes: any; fadeOut: boolean }> = ({
+  prizes,
+  fadeOut,
+}) => (
+  <FadeOut fadeOut={fadeOut}>
+    <Heading>¡Buena suerte!</Heading>
+    <RouletteWrapper>
+      <RouletteContainer>
+        <Line1 />
+        <Line2 />
+        <Line3 />
+        <LogoCenter src={centerLogo} />
+        <Content1>
+          <PrizeTitle>{prizes[0].title}</PrizeTitle>
+          <Logo
+            logo={`${baseUrl}${prizes[0].photo[0].formats.thumbnail.url}`}
+          />
+        </Content1>
+        <Content2>
+          <PrizeTitle>{prizes[1].title}</PrizeTitle>
+          <Logo
+            logo={`${baseUrl}${prizes[1].photo[0].formats.thumbnail.url}`}
+          />
+        </Content2>
+        <Content3>
+          <PrizeTitle>{prizes[2].title}</PrizeTitle>
+          <Logo
+            logo={`${baseUrl}${prizes[2].photo[0].formats.thumbnail.url}`}
+          />
+        </Content3>
+        <Content4>
+          <PrizeTitle>{prizes[3].title}</PrizeTitle>
+          <Logo
+            logo={`${baseUrl}${prizes[3].photo[0].formats.thumbnail.url}`}
+          />
+        </Content4>
+        <Content5>
+          <PrizeTitle>{prizes[4].title}</PrizeTitle>
+          <Logo
+            logo={`${baseUrl}${prizes[4].photo[0].formats.thumbnail.url}`}
+          />
+        </Content5>
+        <Content6>
+          <PrizeTitle>{prizes[5].title}</PrizeTitle>
+          <Logo
+            logo={`${baseUrl}${prizes[5].photo[0].formats.thumbnail.url}`}
+          />
+        </Content6>
+      </RouletteContainer>
+    </RouletteWrapper>
+  </FadeOut>
 );
 
 const Roulette: React.FC = () => {
   const [prizes, setPrizes] = useState([]);
+  const [fadeOut, setFadeOut] = useState(false);
   useEffect(() => {
     setPrizes(JSON.parse(localStorage.getItem('prizesData')));
+    setTimeout(() => setFadeOut(true), 7500);
     setTimeout(navigateToNextView, 9000);
   }, []);
   if (!prizes || prizes.length < 6) {
     return null;
   }
-  return <RouletteComponent prizes={prizes} />;
+  return <RouletteComponent prizes={prizes} fadeOut={fadeOut} />;
 };
 
 export default Roulette;

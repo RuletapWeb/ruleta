@@ -13,22 +13,11 @@ const Container = styled.div`
   width: 100%;
   overflow: hidden;
 `;
-const Heading = styled.h1`
-  font-family: Comfortaa, sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 133%;
-  text-align: center;
-  color: #ffffff;
-  margin-bottom: 3em;
-`;
 
 const Play: React.FC<PageProps> = () => (
   <InfoPage isProtected>
     <Container>
       <ViewWrapper dMaxWidth={400}>
-        <Heading>¡Buena suerte!</Heading>
         <Roulette />
       </ViewWrapper>
     </Container>

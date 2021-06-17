@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { FiMail } from 'react-icons/fi';
 
 type CommerceInfoBoxProps = {
-  userData: any;
   infoTitle: string;
+  email: string;
   tip: string;
 };
+
 const Container = styled.div`
   background: #edf3fb;
   border-radius: 8px;
@@ -52,8 +53,9 @@ const InfoTip = styled.span`
   line-height: 117%;
   color: #353535;
 `;
+
 const CommerceInfoBox: React.FC<CommerceInfoBoxProps> = ({
-  userData,
+  email,
   infoTitle,
   tip,
 }) => (
@@ -65,7 +67,7 @@ const CommerceInfoBox: React.FC<CommerceInfoBoxProps> = ({
       <InfoTitle>{infoTitle}</InfoTitle>
     </TitleWrapper>
     <InfoWrapper>
-      <InfoText>{userData.mail}</InfoText>
+      <InfoText>{email}</InfoText>
       <InfoTip>{tip}</InfoTip>
     </InfoWrapper>
   </Container>

@@ -43,7 +43,7 @@ type ButtonProps = {
 
 const Button: React.FC<ButtonProps> = ({
   onClick,
-  disabled,
+  disabled = false,
   children,
   ...rest
 }) => (

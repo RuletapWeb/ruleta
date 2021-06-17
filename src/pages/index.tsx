@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { PageProps } from 'gatsby';
+import { navigate, PageProps } from 'gatsby';
 
 import {
   inputChangeHandler,
@@ -70,14 +70,16 @@ const Home: React.FC<PageProps> = () => {
   const [prizes, setPrizes] = useState([]);
 
   const handleOnClick = async () => {
-    const playUser = await handleFetch(
-      // '/prizes/winner',
-      '/players',
-      postOptions({ email: email.value, phone: phone.value }),
-    );
-    setUserData(playUser);
-    navigateToNextView();
-    navigateToNextView();
+    try {
+      const playUser = await handleFetch(
+        '/players/register',
+        postOptions({ email: email.value, phone: phone.value }),
+      );
+      setUserData(playUser);
+      navigateToNextView();
+    } catch (err) {
+      navigate('/error');
+    }
   };
 
   const getPrizes = async () => {
