@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import PrizeListItem from './generics/prizeListItem';
 
 type EndItemProps = {
-  quantity?: number;
-  items?: any;
+  maxQuantity?: number;
+  items: any;
 };
 
 type PrizeListProps = EndItemProps & {
@@ -51,14 +51,9 @@ const List = styled.ul`
   }
 `;
 
-const prizesData = (): any => JSON.parse(localStorage.getItem('prizesData'));
-
-const Prizes: React.FC<EndItemProps> = ({
-  items = prizesData(),
-  quantity = 6,
-}) => (
+const Prizes: React.FC<EndItemProps> = ({ items, maxQuantity = 6 }) => (
   <List>
-    {items.slice(0, quantity).map((item: any) => (
+    {items.slice(0, maxQuantity).map((item: any) => (
       <PrizeListItem item={item} key={item.id} />
     ))}
   </List>

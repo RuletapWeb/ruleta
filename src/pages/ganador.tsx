@@ -26,7 +26,7 @@ const BoxWrapper = styled(ContentWrapper)`
   }
 `;
 const Ganador: React.FC<PageProps> = () => (
-  <InfoPage>
+  <InfoPage isProtected>
     <ContentWrapper>
       <PrizeHeading
         emoji="🥳"

@@ -23,10 +23,8 @@ const Layout: React.FC<{ isProtected?: boolean }> = ({
 }) => {
   useEffect(() => {
     if (isProtected) {
-      const prizesData = JSON.parse(localStorage.getItem('prizesData'));
-      const userData = JSON.parse(localStorage.getItem('userData'));
-      console.log(prizesData);
-      console.log(userData);
+      const prizesData = localStorage.getItem('prizesData');
+      const userData = localStorage.getItem('userData');
       if (!prizesData || !userData) {
         navigate('/');
       }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { navigateToNextView } from '@/utils';
 import centerLogo from '../assets/center.png';
 import pointer from '../assets/pointer.png';
 
@@ -175,10 +176,11 @@ const RouletteComponent: React.FC<{ prizes: any }> = ({ prizes }) => (
   </RouletteWrapper>
 );
 
-const Roulette = () => {
+const Roulette: React.FC = () => {
   const [prizes, setPrizes] = useState([]);
   useEffect(() => {
     setPrizes(JSON.parse(localStorage.getItem('prizesData')));
+    setTimeout(navigateToNextView, 9000);
   }, []);
   if (!prizes || prizes.length < 6) {
     return null;

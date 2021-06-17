@@ -6,6 +6,7 @@ import {
   inputChangeHandler,
   navigateToNextView,
   handleFetch,
+  postOptions,
   isValid,
 } from '@/utils';
 
@@ -68,8 +69,24 @@ const Home: React.FC<PageProps> = () => {
   const [email, setEmail] = useState({ value: '', valid: false });
   const [prizes, setPrizes] = useState([]);
 
-  const handleOnClick = () => {
-    setUserData({ email: email.value, phone: phone.value });
+  const handleOnClick = async () => {
+    /*
+     *
+     *
+     * const playUser = await handleFetch(
+     *   '/prizes/winner',
+     *   // '/players',
+     *   postOptions({ email: email.value, phone: phone.value }),
+     * );
+     * setUserData(playUser);
+     * console.log(playUser);
+     * navigateToNextView();
+     *
+     */
+    const player = { email: email.value, phone: phone.value };
+    const playUser = await handleFetch('/prizes/winner', postOptions(player));
+    setUserData(playUser);
+    console.log(playUser);
     navigateToNextView();
   };
 
@@ -114,7 +131,9 @@ const Home: React.FC<PageProps> = () => {
         </TextInputWrapper>
       </Header>
       <MainWrapper>
-        {prizes?.length > 5 && <PrizeList title="Premios disponibles" />}
+        {prizes?.length > 5 && (
+          <PrizeList title="Premios disponibles" items={prizes} />
+        )}
         <Spacer space={60} />
         <BenefitsText>
           Descargá Tap y ganá $200 en tu primera recarga
