@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import InfoPage from '@/components/generics/infoPage';
 import PrizeHeading from '@/components/generics/prizeHeading';
@@ -72,7 +72,12 @@ const GanadorComponent: React.FC<GanadorProps> = ({ userData }) => (
 );
 
 const EndScreenWrapper: React.FC = () => {
-  const user = JSON.parse(localStorage.getItem('userData'));
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem('userData')));
+  }, []);
+
   if (user) {
     return <GanadorComponent userData={user} />;
   }
