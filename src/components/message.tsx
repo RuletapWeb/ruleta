@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { navigate } from 'gatsby';
 import styled from 'styled-components';
 import ViewWrapper from './generics/viewWrapper';
 import Centered from './generics/centered';
+import Button from './generics/button';
 
 type MessageProps = {
   iconUrl: string;
@@ -21,12 +23,16 @@ const Icon = styled.img`
   width: 198.72px;
 `;
 
+const handleOnClick = () => {
+  navigate('/');
+};
+
 const Message: React.FC<MessageProps> = ({ iconUrl, copy, ctaText }) => (
   <ViewWrapper dMaxWidth={329}>
     <Centered>
       <Icon src={iconUrl} />
       <MessageText> {copy} </MessageText>
-      {ctaText}
+      <Button onClick={handleOnClick}>{ctaText}</Button>
     </Centered>
   </ViewWrapper>
 );
