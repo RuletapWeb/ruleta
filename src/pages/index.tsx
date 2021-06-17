@@ -70,23 +70,13 @@ const Home: React.FC<PageProps> = () => {
   const [prizes, setPrizes] = useState([]);
 
   const handleOnClick = async () => {
-    /*
-     *
-     *
-     * const playUser = await handleFetch(
-     *   '/prizes/winner',
-     *   // '/players',
-     *   postOptions({ email: email.value, phone: phone.value }),
-     * );
-     * setUserData(playUser);
-     * console.log(playUser);
-     * navigateToNextView();
-     *
-     */
-    const player = { email: email.value, phone: phone.value };
-    const playUser = await handleFetch('/prizes/winner', postOptions(player));
+    const playUser = await handleFetch(
+      // '/prizes/winner',
+      '/players',
+      postOptions({ email: email.value, phone: phone.value }),
+    );
     setUserData(playUser);
-    console.log(playUser);
+    navigateToNextView();
     navigateToNextView();
   };
 
