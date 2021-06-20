@@ -25,6 +25,8 @@ type Shop = {
 type GanadorProps = {
   userData: {
     status: StrNum;
+    updatedAt: string;
+    id: string;
     shop: Shop;
     prize: {
       title: string;

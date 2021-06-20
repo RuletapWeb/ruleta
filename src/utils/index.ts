@@ -79,6 +79,15 @@ const getOptions = (): { method: 'GET' } => ({
   method: 'GET',
 });
 
+/**
+ * Fetch wrapper abstraction
+ *
+ * @async
+ * @param fetchUrl - Partial route to ping
+ * @param [options] - Propagated to default js fetch options
+ * @throws - If status is not 200
+ * @return - fetch res
+ */
 const handleFetch = async (
   fetchUrl: string,
   options: Partial<ReqOptions> = getOptions(),
@@ -96,6 +105,17 @@ const handleFetch = async (
   }
 };
 
+/**
+ * Creates nice date string
+ *
+ * @param rawDate - Parseable date
+ * @return Nice parsed date string
+ */
+const parseDate = (rawDate: string): string => {
+  const d = new Date(rawDate);
+  return `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} a las ${d.getHours()}:${d.getMinutes()}hs`;
+};
+
 export {
   inputChangeHandler,
   getNextView,
@@ -104,4 +124,5 @@ export {
   getOptions,
   postOptions,
   handleFetch,
+  parseDate,
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { parseDate } from '@/utils';
 import InfoPage from '@/components/generics/infoPage';
 import PrizeHeading from '@/components/generics/prizeHeading';
 import CommerceInfoBox from '@/components/generics/commerceInfoBox';
@@ -54,7 +55,7 @@ const GanadorComponent: React.FC<GanadorProps> = ({ userData }) => (
         {userData.status === 2 && (
           <DateInfoBox
             dateTitle="Fecha de canje:"
-            dateString="00/00/21 a las 00:00 hs."
+            dateString={parseDate(userData.updatedAt)}
           />
         )}
         {userData.status !== 2 && (
