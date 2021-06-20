@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { PageProps } from 'gatsby';
+import { navigate, PageProps } from 'gatsby';
 
-import { inputChangeHandler, navigateToNextView, isValid } from '@/utils';
+import {
+  inputChangeHandler,
+  navigateToNextView,
+  handleFetch,
+  postOptions,
+  isValid,
+} from '@/utils';
 
-import BenefitsArray from '@/components/home/benefitsArray';
+// import BenefitsArray from '@/components/home/benefitsArray';
+import PrizeList from '@/components/prizeList';
 import DownloadLinks from '@/components/home/downloadLinks';
 import TextInput from '@/components/generics/textInput';
 import Footer from '@/components/home/footer';
@@ -49,14 +56,41 @@ const SecondaryText = styled(TitleText)`
 `;
 
 const Spacer = styled.div<{ space: number }>`
-  height: ${(props) => props.space}px;
+  height: ${({ space }) => space}px;
 `;
 
-const handleOnClick = () => navigateToNextView();
+const setUserData = (data: { email: string; phone: StrNum }): void =>
+  localStorage.setItem('userData', JSON.stringify(data));
+const setPrizesData = (data: any): void =>
+  localStorage.setItem('prizesData', JSON.stringify(data));
 
 const Home: React.FC<PageProps> = () => {
   const [phone, setPhone] = useState({ value: '', valid: false });
   const [email, setEmail] = useState({ value: '', valid: false });
+  const [prizes, setPrizes] = useState([]);
+
+  const handleOnClick = async () => {
+    try {
+      const playUser = await handleFetch(
+        '/players/register',
+        postOptions({ email: email.value, phone: phone.value }),
+      );
+      setUserData(playUser);
+      navigateToNextView();
+    } catch (err) {
+      navigate('/error');
+    }
+  };
+
+  const getPrizes = async () => {
+    const premios = await handleFetch('/prizes');
+    setPrizes(premios);
+    setPrizesData(premios);
+  };
+
+  useEffect(() => {
+    getPrizes();
+  }, []);
 
   return (
     <Layout>
@@ -82,17 +116,21 @@ const Home: React.FC<PageProps> = () => {
           <Spacer space={30} />
           <Button
             onClick={handleOnClick}
-            disabled={!phone.valid || !email.valid}
+            disabled={prizes?.length < 6 || !phone.valid || !email.valid}
           >
             Jugar a la RuleTap
           </Button>
         </TextInputWrapper>
       </Header>
       <MainWrapper>
-        <BenefitsArray />
+        {prizes?.length > 5 && (
+          <PrizeList title="Premios disponibles" items={prizes} />
+        )}
+        <Spacer space={60} />
         <BenefitsText>
           Descargá Tap y ganá $200 en tu primera recarga
         </BenefitsText>
+        <Spacer space={30} />
         <DownloadLinks />
       </MainWrapper>
       <Footer />

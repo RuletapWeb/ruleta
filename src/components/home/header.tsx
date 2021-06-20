@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import TapLogo from '@/components/generics/svg/TapLogo';
+import TapLogo from '@/components/generics/svg/tapLogo';
 
 const Wrapper = styled.div`
   background: linear-gradient(12.03deg, #8c9eff -11.5%, #14d2b9 100.72%);

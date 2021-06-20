@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createGlobalStyle } from 'styled-components';
+import { navigate } from 'gatsby';
 import SEO from '@/components/seo';
 
 const GlobalStyle = createGlobalStyle`
@@ -16,16 +17,26 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-/*
- * Insertar Context ACA
- * Todos los children van a tener acceso (todas las views usan layout)
- */
-const Layout: React.FC = ({ children }) => (
-  <>
-    <SEO />
-    <GlobalStyle />
-    {children}
-  </>
-);
+const Layout: React.FC<{ isProtected?: boolean }> = ({
+  children,
+  isProtected = false,
+}) => {
+  useEffect(() => {
+    if (isProtected) {
+      const prizesData = localStorage.getItem('prizesData');
+      const userData = localStorage.getItem('userData');
+      if (!prizesData || !userData) {
+        navigate('/');
+      }
+    }
+  }, []);
+  return (
+    <>
+      <SEO />
+      <GlobalStyle />
+      {children}
+    </>
+  );
+};
 
 export default Layout;

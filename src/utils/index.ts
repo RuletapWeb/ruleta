@@ -8,7 +8,7 @@ const baseUrl = process.env.GATSBY_API_URL;
 const phoneRegex = /^(?:11|[2368]\d)\d{8}$/;
 const emailRegex =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-const viewsArray: string[] = ['', 'ingresar-datos', 'verificar', 'success'];
+const viewsArray: string[] = ['', 'play', 'ganador'];
 
 const inputChangeHandler =
   (setter: (input: any) => void, validator?: (input: StrNum) => boolean) =>
@@ -79,6 +79,15 @@ const getOptions = (): { method: 'GET' } => ({
   method: 'GET',
 });
 
+/**
+ * Fetch wrapper abstraction
+ *
+ * @async
+ * @param fetchUrl - Partial route to ping
+ * @param [options] - Propagated to default js fetch options
+ * @throws - If status is not 200
+ * @return - fetch res
+ */
 const handleFetch = async (
   fetchUrl: string,
   options: Partial<ReqOptions> = getOptions(),
@@ -96,6 +105,17 @@ const handleFetch = async (
   }
 };
 
+/**
+ * Creates nice date string
+ *
+ * @param rawDate - Parseable date
+ * @return Nice parsed date string
+ */
+const parseDate = (rawDate: string): string => {
+  const d = new Date(rawDate);
+  return `${d.getDate()}/${d.getMonth()}/${d.getFullYear()} a las ${d.getHours()}:${d.getMinutes()}hs`;
+};
+
 export {
   inputChangeHandler,
   getNextView,
@@ -104,4 +124,5 @@ export {
   getOptions,
   postOptions,
   handleFetch,
+  parseDate,
 };

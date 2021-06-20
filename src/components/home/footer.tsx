@@ -9,8 +9,10 @@ const FooterWrapper = styled.footer`
   align-items: center;
   text-align: center;
   flex-direction: column;
-  height: 315px;
   background: #002350;
+  @media (max-width: 768px) {
+    height: 315px;
+  }
 `;
 
 const FooterMainText = styled.div`
